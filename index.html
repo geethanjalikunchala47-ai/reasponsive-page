@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillCraft Task 01 - Multi Page Landing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth}
+body{background:#060a22;color:#fff}
+
+/* NAVBAR - FIXED + ANIMATED */
+nav{
+  position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;
+  padding:18px 5%;z-index:9999;transition:0.4s;background:transparent;border-bottom:1px solid rgba(255,255,255,0.1)
+}
+nav.scroll{
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(15px);
+  padding:12px 5%;box-shadow:0 10px 30px rgba(0,0,0,0.2)
+}
+nav.scroll .logo, nav.scroll ul li a{color:#060a22}
+.logo{font-weight:800;font-size:20px;border:2px solid #ff1744;padding:4px 12px;color:#fff;transition:0.3s}
+.logo b{color:#ff1744}
+nav ul{display:flex;list-style:none;gap:30px}
+nav ul li a{
+  text-decoration:none;color:#fff;font-size:13px;font-weight:600;letter-spacing:1px;
+  position:relative;padding:5px 0;transition:0.3s;cursor:pointer
+}
+nav ul li a::before{
+  content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;background:#ff1744;transition:0.4s;transform:translateX(-50%)
+}
+nav ul li a:hover, nav ul li a.active{color:#ff1744}
+nav ul li a:hover::before, nav ul li a.active::before{width:100%}
+
+/* MOBILE */
+#menuBtn{display:none;font-size:28px;cursor:pointer}
+@media(max-width:850px){
+  nav ul{position:absolute;top:100%;left:0;width:100%;background:#fff;flex-direction:column;gap:0;display:none}
+  nav ul.show{display:flex}
+  nav ul li{padding:16px;text-align:center;border-bottom:1px solid #eee}
+  nav ul li a{color:#060a22}
+  #menuBtn{display:block}
+  nav.scroll #menuBtn{color:#060a22}
+}
+
+/* PAGE SYSTEM - ALL PAGES IN ONE FILE */
+.page{display:none;min-height:100vh;padding:120px 5% 60px;animation:fadeIn 0.6s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* HOME PAGE */
+#home{background:radial-gradient(circle at 30% 40%, #1a237e 0%, #060a22 70%);display:flex;align-items:center}
+#home.active{display:flex}
+.hero-left{flex:1}
+.badge{border:1px solid #ff1744;color:#ff1744;padding:6px 14px;border-radius:30px;font-size:11px;display:inline-block;margin-bottom:20px;background:rgba(255,23,68,0.1)}
+.hero-left h1{font-size:68px;line-height:0.95;font-weight:800}
+.hero-left h1 span{color:#4fc3f7;display:block;animation:slide 1s ease}
+@keyframes slide{from{transform:translateX(-50px);opacity:0}to{transform:translateX(0);opacity:1}}
+.hero-left p{color:#9aa2c8;margin-top:20px;max-width:500px;line-height:1.7}
+.btn{margin-top:25px;padding:13px 32px;border-radius:30px;border:none;font-weight:700;cursor:pointer;transition:0.3s}
+.btn-red{background:linear-gradient(90deg,#ff1744,#ff8a65);color:#fff;box-shadow:0 5px 25px rgba(255,23,68,0.4)}
+.btn-red:hover{transform:translateY(-3px) scale(1.05)}
+.hero-right{flex:1;display:flex;justify-content:center}
+.float-card{
+  width:340px;padding:25px;border-radius:20px;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(12px);
+  animation:float 4s ease-in-out infinite
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+
+/* OTHER PAGES */
+.title{font-size:40px;font-weight:800;margin-bottom:10px}
+.title span{color:#ff1744}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px}
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:25px;border-radius:18px;transition:0.3s}
+.card:hover{transform:translateY(-8px);border-color:#ff1744;background:rgba(255,255,255,0.08)}
+.card h3{color:#4fc3f7;margin-bottom:10px}
+input,textarea{width:100%;padding:14px;margin-top:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#fff;outline:none}
+input:focus,textarea:focus{border-color:#ff1744}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">SKILL<b>CRAFT</b></div>
+  <div id="menuBtn">☰</div>
+  <ul id="menu">
+    <li><a onclick="showPage('home')" id="link-home" class="active">HOME</a></li>
+    <li><a onclick="showPage('about')" id="link-about">ABOUT</a></li>
+    <li><a onclick="showPage('services')" id="link-services">SERVICES</a></li>
+    <li><a onclick="showPage('projects')" id="link-projects">PROJECTS</a></li>
+    <li><a onclick="showPage('contact')" id="link-contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE 1: HOME = RESPONSIVE LANDING PAGE (Main Task) -->
+<div class="page active" id="home">
+  <div class="hero-left">
+    <div class="badge">● TASK 01 - SkillCraft Technology</div>
+    <h1>RESPONSIVE <span>LANDING PAGE</span></h1>
+    <p>Create an interactive navigation menu that changes color or style when scrolled or when hovering over a menu item. The navigation menu should have a fixed position and be visible on all pages.</p>
+    <button class="btn btn-red" onclick="showPage('about')">Explore More →</button>
+  </div>
+  <div class="hero-right">
+    <div class="float-card">
+      <h3 style="color:#ff1744">TASK 01 STATUS</h3>
+      <p style="font-size:12px;color:#aaa;margin-top:8px">Interactive Navbar Features:</p>
+      <div style="margin-top:20px;line-height:2;font-size:14px">
+        ✅ Fixed Position<br>✅ Scroll Color Change<br>✅ Hover Animation<br>✅ Responsive Mobile<br>✅ 5 Pages in 1 File
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: ABOUT -->
+<div class="page" id="about">
+  <h2 class="title">About <span>Us</span></h2>
+  <p style="color:#9aa2c8;max-width:700px">We are Sri Indu College students building modern responsive websites as part of SkillCraft Internship.</p>
+  <div class="grid">
+    <div class="card"><h3>🎯 Our Mission</h3><p>To create fast, interactive and beautiful landing pages.</p></div>
+    <div class="card"><h3>💡 Vision</h3><p>Learn by building real-world projects with animations.</p></div>
+    <div class="card"><h3>🚀 Tech Stack</h3><p>HTML5, CSS3, JavaScript - No external library, only one file!</p></div>
+  </div>
+</div>
+
+<!-- PAGE 3: SERVICES -->
+<div class="page" id="services">
+  <h2 class="title">Our <span>Services</span></h2>
+  <div class="grid">
+    <div class="card"><h3>Web Design</h3><p>Creative responsive landing pages with fixed navbar.</p></div>
+    <div class="card"><h3>Animations</h3><p>Scroll + Hover color change effects for navigation.</p></div>
+    <div class="card"><h3>College Projects</h3><p>Task 1 to Task 4 complete guidance for students.</p></div>
+    <div class="card"><h3>Single File Code</h3><p>Easy to submit, easy to understand, no folders needed.</p></div>
+  </div>
+</div>
+
+<!-- PAGE 4: PROJECTS -->
+<div class="page" id="projects">
+  <h2 class="title">College <span>Projects</span></h2>
+  <div class="grid">
+    <div class="card" style="border-left:4px solid #ff1744"><h3>Task 01 - Landing Page</h3><p>Current project - Interactive navbar</p></div>
+    <div class="card" style="border-left:4px solid #4fc3f7"><h3>Task 02 - Thank You Page</h3><p>Thank you for visiting college website</p></div>
+    <div class="card" style="border-left:4px solid #66bb6a"><h3>Task 03 - Portfolio</h3><p>Upcoming creative portfolio design</p></div>
+  </div>
+</div>
+
+<!-- PAGE 5: CONTACT = THANK YOU PAGE INCLUDED -->
+<div class="page" id="contact" style="text-align:center">
+  <h2 class="title">Thank You For <span>Visiting!</span></h2>
+  <p style="color:#9aa2c8">Sri Indu College of Engineering & Technology</p>
+  <div style="max-width:500px;margin:40px auto;background:rgba(255,255,255,0.05);padding:30px;border-radius:20px;border:1px solid rgba(255,255,255,0.1)">
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea rows="4" placeholder="Message"></textarea>
+    <button class="btn btn-red" style="width:100%" onclick="alert('Thank You for Visiting Our College Website!')">Send Message</button>
+  </div>
+  <p>© 2026 SkillCraft Technology | Made for Internship</p>
+</div>
+
+<script>
+// Navbar scroll color change
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>30) document.getElementById('navbar').classList.add('scroll');
+  else document.getElementById('navbar').classList.remove('scroll');
+});
+
+// Page switching logic - ALL PAGES IN ONE FILE
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  
+  document.querySelectorAll('#menu a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('link-'+pageId).classList.add('active');
+  
+  document.getElementById('menu').classList.remove('show');
+  window.scrollTo(0,0);
+}
+
+// Mobile menu
+document.getElementById('menuBtn').onclick=()=>{
+  document.getElementById('menu').classList.toggle('show');
+}
+</script>
+</body>
+</html>
